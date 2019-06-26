@@ -2,13 +2,24 @@ import subprocess
 import datetime
 import time
 
-uczeniowie=[]
+uczeniowie=[{'Robert Mak', '1B'}, {'Ryszard Nowak', '2C'}, {'Anna Mak', '3A'}, {'Monika Zdun', '1B'}]
 oceny=[]
-nauczyciele=[]
+nauczyciele=['Maria Konopka', 'Janusz Miłosz', 'Anna Nosowska', 'Henryk Kozłowski', 'Monika Zatorska']
 przedmioty=['matematyka', 'j.polski', 'geografia', 'biologia', 'fizyka']
 
 def dodajUcznia():
-    print('czekamy na kod')
+    koniec=False
+    while koniec==False:
+        imieNazwisko = str(input('Podaj imie i nazwisko ucznia: '))
+        klasa = str(input('Klasa ucznia (1B,2A...3C): '))
+        uczen={'imieNazwisko': imieNazwisko, 'klasa': klasa}
+        uczeniowie.append(uczen)
+        takNie=str(input('Chcesz dodać kolejnrgo ucznia? Y/N: '))
+        if takNie=='Y' or takNie=='y':
+            koniec=False
+        else:
+            koniec=True
+    print(uczeniowie)
 
 def modyfikujUcznia():
     print('czekamy na kod')
@@ -64,5 +75,5 @@ while tak == True:
         najwyzszaSrednia()
     if wybor == 0:
         tak = False
- #   pauza = input('')
-    time.sleep(5)
+    pauza = input('')
+ #   time.sleep(5)
