@@ -4,12 +4,16 @@ import time
 
 uczeniowie = [{'imieNazwisko': 'Robert Mak', 'klasa': '1B'}, {'imieNazwisko': 'Ryszard Nowak', 'klasa': '2C'},
               {'imieNazwisko': 'Anna Mak', 'klasa': '3A'}, {'imieNazwisko': 'Monika Zdun', 'klasa': '1B'}]
-oceny = [{'uczen': 'Robert Mak', 'klasa':'1B', 'przedmiot':'matematyka', 'ocena':5, 'nauczyciel': 'Anna Nosowska'},
-         {'uczen': 'Robert Mak', 'klasa':'1B', 'przedmiot':'matematyka', 'ocena':5, 'nauczyciel': 'Anna Nosowska'},
-         {'uczen': 'Anna Mak', 'klasa':'3A', 'przedmiot':'geografia', 'ocena':5, 'nauczyciel': 'Monika Zatorska'},
-         {'uczen': 'Robert Mak', 'klasa':'1B', 'przedmiot':'matematyka', 'ocena':5, 'nauczyciel': 'Anna Nosowska'},
-         {'uczen': 'Robert Mak', 'klasa':'1B', 'przedmiot':'matematyka', 'ocena':5, 'nauczyciel': 'Anna Nosowska'}]
-nauczyciele = ['Maria Konopka', 'Janusz Miłosz', 'Zuzanna Nowak'
+oceny = [{'uczen': 'Robert Mak', 'klasa': '1B', 'przedmiot': 'matematyka',
+          'ocena': 5, 'nauczyciel': 'Anna Nosowska'},
+         {'uczen': 'Robert Mak', 'klasa': '1B', 'przedmiot': 'matematyka',
+             'ocena': 3, 'nauczyciel': 'Anna Nosowska'},
+         {'uczen': 'Anna Mak', 'klasa': '3A', 'przedmiot': 'geografia',
+             'ocena': 6, 'nauczyciel': 'Monika Zatorska'},
+         {'uczen': 'Robert Mak', 'klasa': '1B', 'przedmiot': 'matematyka',
+             'ocena': 4, 'nauczyciel': 'Anna Nosowska'},
+         {'uczen': 'Robert Mak', 'klasa': '1B', 'przedmiot': 'matematyka', 'ocena': 2, 'nauczyciel': 'Anna Nosowska'}]
+nauczyciele = ['Maria Konopka', 'Janusz Miłosz', 'Zuzanna Nowak',
                'Anna Nosowska', 'Henryk Kozłowski', 'Monika Zatorska']
 przedmioty = ['matematyka', 'j.polski', 'geografia', 'biologia', 'fizyka']
 
@@ -18,7 +22,7 @@ def wypiszListe(lista):
     print('-----------------------------------------------')
     for i in range(len(lista)):
         print(str(i+1)+' - '+str(lista[i]))
-    if len(lista)==0:
+    if len(lista) == 0:
         print('                 Brak danych')
     print('-----------------------------------------------')
 
@@ -45,7 +49,8 @@ def dodajUcznia():
         klasa = str(input('Klasa ucznia (1B,2A...3C): '))
         uczen = {'imieNazwisko': imieNazwisko, 'klasa': klasa}
         uczeniowie.append(uczen)
-        print('Dodano ucznia '+uczen['imieNazwisko']+' do klasy '+uczen['klasa'])
+        print('Dodano ucznia ' +
+              uczen['imieNazwisko']+' do klasy '+uczen['klasa'])
         takNie = str(input('Chcesz dodać kolejnego ucznia? Y/N: '))
         if takNie == 'Y' or takNie == 'y':
             koniec = False
@@ -58,17 +63,18 @@ def modyfikujUcznia():
     print('-----------------------------------------------')
     print('                  UCZNIOWIE')
     wypiszListe(uczeniowie)
-    nr=int(input('Podaj numer ucznia: '))
-    if nr>len(uczeniowie) or nr<1:
+    nr = int(input('Podaj numer ucznia: '))
+    if nr > len(uczeniowie) or nr < 1:
         print('Lista obejmuje '+str(len(uczeniowie))+' uczniów.')
         print('Sprubój jeszcze raz.')
     else:
-        takNie=str(input('Czy chodzi o ucznia: '+uczeniowie[nr-1]['imieNazwisko']+' ('+uczeniowie[nr-1]['klasa']+')? Y/N: '))
+        takNie = str(input('Czy chodzi o ucznia: ' +
+                           uczeniowie[nr-1]['imieNazwisko']+' ('+uczeniowie[nr-1]['klasa']+')? Y/N: '))
         if takNie == 'Y' or takNie == 'y':
             imieNazwisko = str(input('Podaj imie i nazwisko ucznia: '))
             klasa = str(input('Klasa ucznia (1B,2A...3C): '))
-            uczeniowie[nr-1]['imieNazwisko']= imieNazwisko
-            uczeniowie[nr-1]['klasa']= klasa
+            uczeniowie[nr-1]['imieNazwisko'] = imieNazwisko
+            uczeniowie[nr-1]['klasa'] = klasa
     print('Zmodyfikowano ucznia nr '+str(nr)+') '+imieNazwisko+' ('+klasa+')')
 
 
@@ -78,9 +84,10 @@ def usunUcznia():
     wypiszListe(uczeniowie)
     imieNazwisko = str(input('Podaj imie i nazwisko ucznia do usunięcia: '))
     klasa = str(input('Podaj klasę ucznia (1B,2A...3C): '))
-    uczenDoUsuniecia={'imieNazwisko': imieNazwisko, 'klasa': klasa}
+    uczenDoUsuniecia = {'imieNazwisko': imieNazwisko, 'klasa': klasa}
     if uczenDoUsuniecia in uczeniowie:
-        takNie=str(input('Czy chcesz usunąć ucznia: '+imieNazwisko+' ('+klasa+') z listy uczniów? Y/N: '))
+        takNie = str(input('Czy chcesz usunąć ucznia: ' +
+                           imieNazwisko+' ('+klasa+') z listy uczniów? Y/N: '))
         if takNie == 'Y' or takNie == 'y':
             uczeniowie.remove(uczenDoUsuniecia)
             print('Usunięto ucznia z listy.')
@@ -92,7 +99,31 @@ def usunUcznia():
 
 
 def ocenyUcznia():
-    print('czekamy na kod')
+    print('-----------------------------------------------')
+    print('                  UCZNIOWIE')
+    wypiszListe(uczeniowie)
+    nrU = int(input('Podaj numer ucznia: '))
+    if nrU > len(uczeniowie) or nrU < 1:
+        print('Lista obejmuje '+str(len(uczeniowie))+' uczniów.')
+        print('Sprubój jeszcze raz.')
+    else:
+        takNie = str(input('Oceny z wybranego przedmiotu? Y/N: '))
+        if takNie == 'Y' or takNie == 'y':
+            print('-----------------------------------------------')
+            print('                  PRZEDMIOTY')
+            wypiszListe(przedmioty)
+            nrP = 0
+            while nrP == 0:
+                nrP = int(input('Wybierz przedmiot: '))
+                if nrP > len(przedmioty) or nrP < 1:
+                    nrP = 0
+            for i in range(len(oceny)):
+                if oceny[i]['uczen'] == uczeniowie[nrU-1]['imieNazwisko'] and oceny[i]['klasa'] == uczeniowie[nrU-1]['klasa'] and oceny[i]['przedmiot'] == przedmioty[nrP-1]:
+                    print(oceny[i])
+        else:
+            for i in range(len(oceny)):
+                if oceny[i]['uczen'] == uczeniowie[nrU-1]['imieNazwisko'] and oceny[i]['klasa'] == uczeniowie[nrU-1]['klasa']:
+                    print(oceny[i])
 
 
 def ocenyWybranegoUcznia(uczen):
@@ -103,36 +134,37 @@ def dodajOcene():
     print('-----------------------------------------------')
     print('                  UCZNIOWIE')
     wypiszListe(uczeniowie)
-    nrU=int(input('Podaj numer ucznia: '))
-    if nrU>len(uczeniowie) or nrU<1:
+    nrU = int(input('Podaj numer ucznia: '))
+    if nrU > len(uczeniowie) or nrU < 1:
         print('Lista obejmuje '+str(len(uczeniowie))+' uczniów.')
         print('Sprubój jeszcze raz.')
     else:
         print('-----------------------------------------------')
         print('                  PRZEDMIOTY')
         wypiszListe(przedmioty)
-        nrP=0
-        while nrP==0:
-            nrP=int(input('Wybierz przedmiot: '))
-            if nrP>len(przedmioty) or nrP<1:
-                nrP=0
-        ocena=0
-        while ocena==0:
-            ocena=int(input('Podaj ocenę (1..6): '))
-            if ocena<1 or ocena>6:
-                ocena=0
+        nrP = 0
+        while nrP == 0:
+            nrP = int(input('Wybierz przedmiot: '))
+            if nrP > len(przedmioty) or nrP < 1:
+                nrP = 0
+        ocena = 0
+        while ocena == 0:
+            ocena = int(input('Podaj ocenę (1..6): '))
+            if ocena < 1 or ocena > 6:
+                ocena = 0
         print('-----------------------------------------------')
         print('                  NAUCZYCIELE')
         wypiszListe(nauczyciele)
-        nrN=0
-        while nrN==0:
-            nrN=int(input('Ocenę wystawił: '))
-            if nrN>len(nauczyciele) or nrN<1:
-                nrN=0
-        imieNazwisko=uczeniowie[nrU-1]['imieNazwisko']
-        klasa=uczeniowie[nrU-1]['klasa']
-        wybranyUczen={'imieNazwisko': imieNazwisko, 'klasa': klasa}
-        ocenaNowa={'uczen': imieNazwisko, 'klasa':klasa, 'przedmiot':przedmioty[nrP-1], 'ocena':ocena, 'nauczyciel': nauczyciele[nrN-1]}
+        nrN = 0
+        while nrN == 0:
+            nrN = int(input('Ocenę wystawił: '))
+            if nrN > len(nauczyciele) or nrN < 1:
+                nrN = 0
+        imieNazwisko = uczeniowie[nrU-1]['imieNazwisko']
+        klasa = uczeniowie[nrU-1]['klasa']
+        wybranyUczen = {'imieNazwisko': imieNazwisko, 'klasa': klasa}
+        ocenaNowa = {'uczen': imieNazwisko, 'klasa': klasa,
+                     'przedmiot': przedmioty[nrP-1], 'ocena': ocena, 'nauczyciel': nauczyciele[nrN-1]}
         oceny.append(ocenaNowa)
         print('-----------------------------------------------')
         print('    OCENY ucznia '+imieNazwisko+' ('+klasa+')')
