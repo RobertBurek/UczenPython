@@ -14,6 +14,8 @@ def wypiszListe(lista):
     print('-----------------------------------------------')
     for i in range(len(lista)):
         print(str(i+1)+' - '+str(lista[i]))
+    if len(lista)==0:
+        print('                 Brak danych')
     print('-----------------------------------------------')
 
 
@@ -39,7 +41,8 @@ def dodajUcznia():
         klasa = str(input('Klasa ucznia (1B,2A...3C): '))
         uczen = {'imieNazwisko': imieNazwisko, 'klasa': klasa}
         uczeniowie.append(uczen)
-        takNie = str(input('Chcesz dodać kolejnrgo ucznia? Y/N: '))
+        print('Dodano ucznia '+uczen['imieNazwisko']+' do klasy '+uczen['klasa'])
+        takNie = str(input('Chcesz dodać kolejnego ucznia? Y/N: '))
         if takNie == 'Y' or takNie == 'y':
             koniec = False
         else:
@@ -48,7 +51,21 @@ def dodajUcznia():
 
 
 def modyfikujUcznia():
-    print('czekamy na kod')
+    print('-----------------------------------------------')
+    print('                  UCZNIOWIE')
+    wypiszListe(uczeniowie)
+    nr=int(input('Podaj numer ucznia: '))
+    if nr>=len(uczeniowie):
+        print('Lista obejmuje '+str(len(uczeniowie))+' uczniów.')
+        print('Sprubój jeszcze raz.')
+    else:
+        takNie=str(input('Czy chodzi o ucznia: '+uczeniowie[nr-1]['imieNazwisko']+' ('+uczeniowie[nr-1]['klasa']+')? Y/N: '))
+        if takNie == 'Y' or takNie == 'y':
+            imieNazwisko = str(input('Podaj imie i nazwisko ucznia: '))
+            klasa = str(input('Klasa ucznia (1B,2A...3C): '))
+            uczeniowie[nr-1]['imieNazwisko']= imieNazwisko
+            uczeniowie[nr-1]['klasa']= klasa
+    print('Zmodyfikowano ucznia nr '+str(nr)+') '+imieNazwisko+' ('+klasa+')')
 
 
 def usunUcznia():
