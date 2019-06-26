@@ -69,7 +69,24 @@ def modyfikujUcznia():
 
 
 def usunUcznia():
-    print('czekamy na kod')
+    print('-----------------------------------------------')
+    print('                  UCZNIOWIE')
+    wypiszListe(uczeniowie)
+    imieNazwisko = str(input('Podaj imie i nazwisko ucznia do usunięcia: '))
+    klasa = str(input('Podaj klasę ucznia (1B,2A...3C): '))
+    uczenDoUsuniecia={'imieNazwisko': imieNazwisko, 'klasa': klasa}
+    if uczenDoUsuniecia in uczeniowie:
+        takNie=str(input('Czy chcesz usunąć ucznia: '+imieNazwisko+' ('+klasa+') z listy uczniów? Y/N: '))
+        if takNie == 'Y' or takNie == 'y':
+            uczeniowie.remove(uczenDoUsuniecia)
+            print('Usunięto ucznia z listy.')
+            print('-----------------------------------------------')
+            print('                  UCZNIOWIE')
+            wypiszListe(uczeniowie)
+    else:
+        print('Nie ma takiego ucznia na liście.')
+
+
 
 
 def ocenyUcznia():
