@@ -2,42 +2,74 @@ import subprocess
 import datetime
 import time
 
-uczeniowie=[{'Robert Mak', '1B'}, {'Ryszard Nowak', '2C'}, {'Anna Mak', '3A'}, {'Monika Zdun', '1B'}]
-oceny=[]
-nauczyciele=['Maria Konopka', 'Janusz Miłosz', 'Anna Nosowska', 'Henryk Kozłowski', 'Monika Zatorska']
-przedmioty=['matematyka', 'j.polski', 'geografia', 'biologia', 'fizyka']
+uczeniowie = [{'imieNazwisko': 'Robert Mak', 'klasa': '1B'}, {'imieNazwisko': 'Ryszard Nowak', 'klasa': '2C'},
+              {'imieNazwisko': 'Anna Mak', 'klasa': '3A'}, {'imieNazwisko': 'Monika Zdun', 'klasa': '1B'}]
+oceny = []
+nauczyciele = ['Maria Konopka', 'Janusz Miłosz', 'Zuzanna Nowak'
+               'Anna Nosowska', 'Henryk Kozłowski', 'Monika Zatorska']
+przedmioty = ['matematyka', 'j.polski', 'geografia', 'biologia', 'fizyka']
+
+
+def wypiszListe(lista):
+    print('-----------------------------------------------')
+    for i in range(len(lista)):
+        print(str(i+1)+' - '+str(lista[i]))
+    print('-----------------------------------------------')
+
+
+def wypiszListy():
+    print('-----------------------------------------------')
+    print('                  UCZNIOWIE')
+    wypiszListe(uczeniowie)
+    print('-----------------------------------------------')
+    print('                    OCENY')
+    wypiszListe(oceny)
+    print('-----------------------------------------------')
+    print('                 NAUCZYCIELE')
+    wypiszListe(nauczyciele)
+    print('-----------------------------------------------')
+    print('                 PRZEDMIOTY')
+    wypiszListe(przedmioty)
+
 
 def dodajUcznia():
-    koniec=False
-    while koniec==False:
+    koniec = False
+    while koniec == False:
         imieNazwisko = str(input('Podaj imie i nazwisko ucznia: '))
         klasa = str(input('Klasa ucznia (1B,2A...3C): '))
-        uczen={'imieNazwisko': imieNazwisko, 'klasa': klasa}
+        uczen = {'imieNazwisko': imieNazwisko, 'klasa': klasa}
         uczeniowie.append(uczen)
-        takNie=str(input('Chcesz dodać kolejnrgo ucznia? Y/N: '))
-        if takNie=='Y' or takNie=='y':
-            koniec=False
+        takNie = str(input('Chcesz dodać kolejnrgo ucznia? Y/N: '))
+        if takNie == 'Y' or takNie == 'y':
+            koniec = False
         else:
-            koniec=True
-    print(uczeniowie)
+            koniec = True
+    wypiszListe(uczeniowie)
+
 
 def modyfikujUcznia():
     print('czekamy na kod')
 
+
 def usunUcznia():
     print('czekamy na kod')
+
 
 def ocenyUcznia():
     print('czekamy na kod')
 
+
 def dodajOcene():
     print('czekamy na kod')
+
 
 def najlepszyUczen():
     print('czekamy na kod')
 
+
 def najgorszyUczen():
     print('czekamy na kod')
+
 
 def najwyzszaSrednia():
     print('czekamy na kod')
@@ -55,6 +87,7 @@ while tak == True:
     print('6 - Najlepszy uczeń')
     print('7 - Najgorszy uczeń')
     print('8 - Najwyższa średnia')
+    print('9 - Wszystkie listy')
     print('0 - Koniec')
     wybor = int(input('Twój wybór: '))
     if wybor == 1:
@@ -73,6 +106,8 @@ while tak == True:
         najgorszyUczen()
     if wybor == 8:
         najwyzszaSrednia()
+    if wybor == 9:
+        wypiszListy()
     if wybor == 0:
         tak = False
     pauza = input('')
