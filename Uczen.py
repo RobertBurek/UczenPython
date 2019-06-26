@@ -4,7 +4,11 @@ import time
 
 uczeniowie = [{'imieNazwisko': 'Robert Mak', 'klasa': '1B'}, {'imieNazwisko': 'Ryszard Nowak', 'klasa': '2C'},
               {'imieNazwisko': 'Anna Mak', 'klasa': '3A'}, {'imieNazwisko': 'Monika Zdun', 'klasa': '1B'}]
-oceny = []
+oceny = [{'uczen': 'Robert Mak', 'klasa':'1B', 'przedmiot':'matematyka', 'ocena':5, 'nauczyciel': 'Anna Nosowska'},
+         {'uczen': 'Robert Mak', 'klasa':'1B', 'przedmiot':'matematyka', 'ocena':5, 'nauczyciel': 'Anna Nosowska'},
+         {'uczen': 'Anna Mak', 'klasa':'3A', 'przedmiot':'geografia', 'ocena':5, 'nauczyciel': 'Monika Zatorska'},
+         {'uczen': 'Robert Mak', 'klasa':'1B', 'przedmiot':'matematyka', 'ocena':5, 'nauczyciel': 'Anna Nosowska'},
+         {'uczen': 'Robert Mak', 'klasa':'1B', 'przedmiot':'matematyka', 'ocena':5, 'nauczyciel': 'Anna Nosowska'}]
 nauczyciele = ['Maria Konopka', 'Janusz Miłosz', 'Zuzanna Nowak'
                'Anna Nosowska', 'Henryk Kozłowski', 'Monika Zatorska']
 przedmioty = ['matematyka', 'j.polski', 'geografia', 'biologia', 'fizyka']
@@ -55,7 +59,7 @@ def modyfikujUcznia():
     print('                  UCZNIOWIE')
     wypiszListe(uczeniowie)
     nr=int(input('Podaj numer ucznia: '))
-    if nr>=len(uczeniowie):
+    if nr>len(uczeniowie) or nr<1:
         print('Lista obejmuje '+str(len(uczeniowie))+' uczniów.')
         print('Sprubój jeszcze raz.')
     else:
@@ -87,14 +91,52 @@ def usunUcznia():
         print('Nie ma takiego ucznia na liście.')
 
 
-
-
 def ocenyUcznia():
     print('czekamy na kod')
 
 
+def ocenyWybranegoUcznia(uczen):
+    wypiszListe(oceny)
+
+
 def dodajOcene():
-    print('czekamy na kod')
+    print('-----------------------------------------------')
+    print('                  UCZNIOWIE')
+    wypiszListe(uczeniowie)
+    nrU=int(input('Podaj numer ucznia: '))
+    if nrU>len(uczeniowie) or nrU<1:
+        print('Lista obejmuje '+str(len(uczeniowie))+' uczniów.')
+        print('Sprubój jeszcze raz.')
+    else:
+        print('-----------------------------------------------')
+        print('                  PRZEDMIOTY')
+        wypiszListe(przedmioty)
+        nrP=0
+        while nrP==0:
+            nrP=int(input('Wybierz przedmiot: '))
+            if nrP>len(przedmioty) or nrP<1:
+                nrP=0
+        ocena=0
+        while ocena==0:
+            ocena=int(input('Podaj ocenę (1..6): '))
+            if ocena<1 or ocena>6:
+                ocena=0
+        print('-----------------------------------------------')
+        print('                  NAUCZYCIELE')
+        wypiszListe(nauczyciele)
+        nrN=0
+        while nrN==0:
+            nrN=int(input('Ocenę wystawił: '))
+            if nrN>len(nauczyciele) or nrN<1:
+                nrN=0
+        imieNazwisko=uczeniowie[nrU-1]['imieNazwisko']
+        klasa=uczeniowie[nrU-1]['klasa']
+        wybranyUczen={'imieNazwisko': imieNazwisko, 'klasa': klasa}
+        ocenaNowa={'uczen': imieNazwisko, 'klasa':klasa, 'przedmiot':przedmioty[nrP-1], 'ocena':ocena, 'nauczyciel': nauczyciele[nrN-1]}
+        oceny.append(ocenaNowa)
+        print('-----------------------------------------------')
+        print('    OCENY ucznia '+imieNazwisko+' ('+klasa+')')
+        ocenyWybranegoUcznia(wybranyUczen)
 
 
 def najlepszyUczen():
