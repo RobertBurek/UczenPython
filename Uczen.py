@@ -216,7 +216,7 @@ def najlepszyUczen():
         if ileOcen != 0:
             sredniaUcznia.append(
                 {'uczen': uczeniowie[i]['imieNazwisko'], 'klasa': uczeniowie[i]['klasa'], 'srednia': sumaOcen/ileOcen})
-    maxSrednia = {'uczen': '','klasa': '', 'srednia': 0}
+    maxSrednia = {'uczen': '', 'klasa': '', 'srednia': 0}
     if len(sredniaUcznia) != 0:
         for i in range(len(sredniaUcznia)):
             if sredniaUcznia[i]['srednia'] > maxSrednia['srednia']:
@@ -229,7 +229,39 @@ def najlepszyUczen():
 
 
 def najgorszyUczen():
-    print('czekamy na kod')
+    print('-----------------------------------------------')
+    print('                  PRZEDMIOTY')
+    wypiszListe(przedmioty)
+    nrP = 0
+    while nrP == 0:
+        nrP = int(input('Wybierz przedmiot: '))
+        if nrP > len(przedmioty) or nrP < 1:
+            nrP = 0
+    ocenyPrzedmiot = []
+    for i in range(len(oceny)):
+        if oceny[i]['przedmiot'] == przedmioty[nrP-1]:
+            ocenyPrzedmiot.append(oceny[i])
+    sredniaUcznia = []
+    for i in range(len(uczeniowie)):
+        ileOcen = 0
+        sumaOcen = 0
+        for j in range(len(ocenyPrzedmiot)):
+            if ocenyPrzedmiot[j]['uczen'] == uczeniowie[i]['imieNazwisko']:
+                sumaOcen += ocenyPrzedmiot[j]['ocena']
+                ileOcen += 1
+        if ileOcen != 0:
+            sredniaUcznia.append(
+                {'uczen': uczeniowie[i]['imieNazwisko'], 'klasa': uczeniowie[i]['klasa'], 'srednia': sumaOcen/ileOcen})
+    minSrednia = {'uczen': '', 'klasa': '', 'srednia': 7}
+    if len(sredniaUcznia) != 0:
+        for i in range(len(sredniaUcznia)):
+            if sredniaUcznia[i]['srednia'] < minSrednia['srednia']:
+                minSrednia = sredniaUcznia[i]
+        print('Najsłabszym uczniem z przedmiotu ' + przedmioty[nrP-1])
+        print('jest '+minSrednia['uczen']+' z ' + minSrednia['klasa'] +
+              ' ze średnią '+str(minSrednia['srednia']))
+    else:
+        print('Nie ma najsłabszego ucznia z tego przedmiotu.')
 
 
 def najwyzszaSrednia():
