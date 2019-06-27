@@ -210,7 +210,7 @@ def najlepszyUczen():
         ileOcen = 0
         sumaOcen = 0
         for j in range(len(ocenyPrzedmiot)):
-            if ocenyPrzedmiot[j]['uczen'] == uczeniowie[i]['imieNazwisko']:
+            if ocenyPrzedmiot[j]['uczen'] == uczeniowie[i]['imieNazwisko'] and ocenyPrzedmiot[j]['klasa'] == uczeniowie[i]['klasa']:
                 sumaOcen += ocenyPrzedmiot[j]['ocena']
                 ileOcen += 1
         if ileOcen != 0:
@@ -246,7 +246,7 @@ def najgorszyUczen():
         ileOcen = 0
         sumaOcen = 0
         for j in range(len(ocenyPrzedmiot)):
-            if ocenyPrzedmiot[j]['uczen'] == uczeniowie[i]['imieNazwisko']:
+            if ocenyPrzedmiot[j]['uczen'] == uczeniowie[i]['imieNazwisko'] and ocenyPrzedmiot[j]['klasa'] == uczeniowie[i]['klasa']:
                 sumaOcen += ocenyPrzedmiot[j]['ocena']
                 ileOcen += 1
         if ileOcen != 0:
@@ -265,7 +265,28 @@ def najgorszyUczen():
 
 
 def najwyzszaSrednia():
-    print('czekamy na kod')
+    sredniaUcznia = []
+    for i in range(len(uczeniowie)):
+        ileOcen = 0
+        sumaOcen = 0
+        for j in range(len(oceny)):
+            if oceny[j]['uczen'] == uczeniowie[i]['imieNazwisko'] and oceny[j]['klasa'] == uczeniowie[i]['klasa']:
+                sumaOcen += oceny[j]['ocena']
+                ileOcen += 1
+        if ileOcen != 0:
+            sredniaUcznia.append(
+                {'uczen': uczeniowie[i]['imieNazwisko'], 'klasa': uczeniowie[i]['klasa'], 'srednia': sumaOcen/ileOcen})
+    print(sredniaUcznia)
+    maxSrednia = {'uczen': '', 'klasa': '', 'srednia': 0}
+    if len(sredniaUcznia) != 0:
+        for i in range(len(sredniaUcznia)):
+            if sredniaUcznia[i]['srednia'] > maxSrednia['srednia']:
+                maxSrednia = sredniaUcznia[i]
+        print('Najlepszym uczniem ze wszystkich uczniów')
+        print('jest '+maxSrednia['uczen']+' z '+maxSrednia['klasa'] +
+              ' ze średnią '+str(maxSrednia['srednia']))
+    else:
+        print('Nie ma najlepdszego ucznia.')
 
 
 tak = True
