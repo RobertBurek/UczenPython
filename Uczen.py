@@ -98,6 +98,10 @@ def usunUcznia():
         print('Nie ma takiego ucznia na liście.')
 
 
+def wypiszOcene(ocenaUcznia):
+    print(str(ocenaUcznia['przedmiot'])+'   '+str(ocenaUcznia['ocena'])+'  wystawiona przez: '+str(ocenaUcznia['nauczyciel']))
+
+
 def ocenyUcznia():
     print('-----------------------------------------------')
     print('                  UCZNIOWIE')
@@ -117,17 +121,31 @@ def ocenyUcznia():
                 nrP = int(input('Wybierz przedmiot: '))
                 if nrP > len(przedmioty) or nrP < 1:
                     nrP = 0
+            print('-----------------------------------------------')
+            print('    OCENY ucznia '+uczeniowie[nrU-1]['imieNazwisko']+' ('+uczeniowie[nrU-1]['klasa']+')')
+            print('-----------------------------------------------')
             for i in range(len(oceny)):
                 if oceny[i]['uczen'] == uczeniowie[nrU-1]['imieNazwisko'] and oceny[i]['klasa'] == uczeniowie[nrU-1]['klasa'] and oceny[i]['przedmiot'] == przedmioty[nrP-1]:
-                    print(oceny[i])
+                    wypiszOcene(oceny[i])
+            print('-----------------------------------------------')
         else:
+            print('-----------------------------------------------')
+            print('    OCENY ucznia '+uczeniowie[nrU-1]['imieNazwisko']+' ('+uczeniowie[nrU-1]['klasa']+')')
+            print('-----------------------------------------------')
             for i in range(len(oceny)):
                 if oceny[i]['uczen'] == uczeniowie[nrU-1]['imieNazwisko'] and oceny[i]['klasa'] == uczeniowie[nrU-1]['klasa']:
-                    print(oceny[i])
+                    wypiszOcene(oceny[i])
+            print('-----------------------------------------------')
 
 
 def ocenyWybranegoUcznia(uczen):
-    wypiszListe(oceny)
+    print('-----------------------------------------------')
+    print('    OCENY ucznia '+uczen['imieNazwisko']+' ('+uczen['klasa']+')')
+    print('-----------------------------------------------')
+    for i in range(len(oceny)):
+        if oceny[i]['uczen'] == uczen['imieNazwisko'] and oceny[i]['klasa'] == uczen['klasa']:
+            wypiszOcene(oceny[i])
+    print('-----------------------------------------------')
 
 
 def dodajOcene():
