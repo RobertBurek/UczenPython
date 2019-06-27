@@ -12,6 +12,8 @@ oceny = [{'uczen': 'Robert Mak', 'klasa': '1B', 'przedmiot': 'matematyka',
              'ocena': 6, 'nauczyciel': 'Monika Zatorska'},
          {'uczen': 'Robert Mak', 'klasa': '1B', 'przedmiot': 'matematyka',
              'ocena': 4, 'nauczyciel': 'Anna Nosowska'},
+         {'uczen': 'Robert Mak', 'klasa': '1B', 'przedmiot': 'geografia',
+             'ocena': 1, 'nauczyciel': 'Anna Nosowska'},
          {'uczen': 'Robert Mak', 'klasa': '1B', 'przedmiot': 'matematyka', 'ocena': 2, 'nauczyciel': 'Anna Nosowska'}]
 nauczyciele = ['Maria Konopka', 'Janusz Miłosz', 'Zuzanna Nowak',
                'Anna Nosowska', 'Henryk Kozłowski', 'Monika Zatorska']
@@ -99,7 +101,8 @@ def usunUcznia():
 
 
 def wypiszOcene(ocenaUcznia):
-    print(str(ocenaUcznia['przedmiot'])+'   '+str(ocenaUcznia['ocena'])+'  wystawiona przez: '+str(ocenaUcznia['nauczyciel']))
+    print(str(ocenaUcznia['przedmiot'])+'   '+str(ocenaUcznia['ocena']
+                                                  )+'  wystawiona przez: '+str(ocenaUcznia['nauczyciel']))
 
 
 def ocenyUcznia():
@@ -122,7 +125,8 @@ def ocenyUcznia():
                 if nrP > len(przedmioty) or nrP < 1:
                     nrP = 0
             print('-----------------------------------------------')
-            print('    OCENY ucznia '+uczeniowie[nrU-1]['imieNazwisko']+' ('+uczeniowie[nrU-1]['klasa']+')')
+            print('    OCENY ucznia ' +
+                  uczeniowie[nrU-1]['imieNazwisko']+' ('+uczeniowie[nrU-1]['klasa']+')')
             print('-----------------------------------------------')
             for i in range(len(oceny)):
                 if oceny[i]['uczen'] == uczeniowie[nrU-1]['imieNazwisko'] and oceny[i]['klasa'] == uczeniowie[nrU-1]['klasa'] and oceny[i]['przedmiot'] == przedmioty[nrP-1]:
@@ -130,7 +134,8 @@ def ocenyUcznia():
             print('-----------------------------------------------')
         else:
             print('-----------------------------------------------')
-            print('    OCENY ucznia '+uczeniowie[nrU-1]['imieNazwisko']+' ('+uczeniowie[nrU-1]['klasa']+')')
+            print('    OCENY ucznia ' +
+                  uczeniowie[nrU-1]['imieNazwisko']+' ('+uczeniowie[nrU-1]['klasa']+')')
             print('-----------------------------------------------')
             for i in range(len(oceny)):
                 if oceny[i]['uczen'] == uczeniowie[nrU-1]['imieNazwisko'] and oceny[i]['klasa'] == uczeniowie[nrU-1]['klasa']:
@@ -184,13 +189,43 @@ def dodajOcene():
         ocenaNowa = {'uczen': imieNazwisko, 'klasa': klasa,
                      'przedmiot': przedmioty[nrP-1], 'ocena': ocena, 'nauczyciel': nauczyciele[nrN-1]}
         oceny.append(ocenaNowa)
-        print('-----------------------------------------------')
-        print('    OCENY ucznia '+imieNazwisko+' ('+klasa+')')
         ocenyWybranegoUcznia(wybranyUczen)
 
 
 def najlepszyUczen():
-    print('czekamy na kod')
+    print('-----------------------------------------------')
+    print('                  PRZEDMIOTY')
+    wypiszListe(przedmioty)
+    nrP = 0
+    while nrP == 0:
+        nrP = int(input('Wybierz przedmiot: '))
+        if nrP > len(przedmioty) or nrP < 1:
+            nrP = 0
+    ocenyPrzedmiot = []
+    for i in range(len(oceny)):
+        if oceny[i]['przedmiot'] == przedmioty[nrP-1]:
+            ocenyPrzedmiot.append(oceny[i])
+    sredniaUcznia = []
+    for i in range(len(uczeniowie)):
+        ileOcen = 0
+        sumaOcen = 0
+        for j in range(len(ocenyPrzedmiot)):
+            if ocenyPrzedmiot[j]['uczen'] == uczeniowie[i]['imieNazwisko']:
+                sumaOcen += ocenyPrzedmiot[j]['ocena']
+                ileOcen += 1
+        if ileOcen != 0:
+            sredniaUcznia.append(
+                {'uczen': uczeniowie[i]['imieNazwisko'], 'klasa': uczeniowie[i]['klasa'], 'srednia': sumaOcen/ileOcen})
+    maxSrednia = {'uczen': '','klasa': '', 'srednia': 0}
+    if len(sredniaUcznia) != 0:
+        for i in range(len(sredniaUcznia)):
+            if sredniaUcznia[i]['srednia'] > maxSrednia['srednia']:
+                maxSrednia = sredniaUcznia[i]
+        print('Najlepszym uczniem z przedmiotu '+przedmioty[nrP-1])
+        print('jest '+maxSrednia['uczen']+' z '+maxSrednia['klasa'] +
+              ' ze średnią '+str(maxSrednia['srednia']))
+    else:
+        print('Nie ma najlepdszego ucznia z tego przedmiotu.')
 
 
 def najgorszyUczen():
